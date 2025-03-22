@@ -2,22 +2,27 @@ import sys
 import base64
 
 def encode():
-    "Переводит байты в ASCII85"
+    "Переводит байты в ASCII85 символы"
     data = sys.stdin.buffer.read()
-
+    encoded_newline = b'\n'
     encoded_data = base64.a85encode(data)
     # вывод
-    sys.stdout.buffer.write(encoded_data)
+    sys.stdout.buffer.write(encoded_data + encoded_newline)
     sys.exit(0)
 
 def decode():
     "Переводит символы ASCII85 в байты"
-    data = sys.stdin.read()
-    # Декодируем ASCII85
-    decoded_bytes = base64.a85decode(data, adobe=False)
-    # Выводим результат в stdout
-    sys.stdout.buffer.write(decoded_bytes)
-    sys.exit(0)
+    data = sys.stdin.buffer.read()
+    encoded_newline = b'\n'
+    try:
+        # Декодируем ASCII85
+        decoded_bytes = base64.a85decode(data, adobe=False)
+        # Выводим результат в stdout
+        sys.stdout.buffer.write(decoded_bytes + encoded_newline)
+        sys.exit(0)
+    except ValueError:
+        sys.stdout.write("Error: Enter characters that are in ascii85 encoding")
+        sys.exit(3)
 
 def check_arg():
     # Разрешенные аргументы
