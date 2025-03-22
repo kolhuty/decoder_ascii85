@@ -1,0 +1,8 @@
+ASCII85 Encoder/Decoder Tool
+
+Usage: ./program [OPTIONS]
+
+Options:
+  -e        Encode data to ASCII85 (default mode)
+  -d        Decode data from ASCII85
+  --help    Show this help message

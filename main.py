@@ -21,12 +21,12 @@ def decode():
         sys.stdout.buffer.write(decoded_bytes + encoded_newline)
         sys.exit(0)
     except ValueError:
-        sys.stdout.write("Error: Enter characters that are in ascii85 encoding")
+        sys.stderr.write("Error: Enter characters that are in ascii85 encoding")
         sys.exit(3)
 
 def check_arg():
     # Разрешенные аргументы
-    valid_args = {"-e", "-d"}
+    valid_args = {"-e", "-d", "--help"}
     args = sys.argv[1:]
 
     #проверка на неизвестные элементы
@@ -36,6 +36,10 @@ def check_arg():
         sys.stderr.write(f"Error: Option does not exist. Call --help {' '.join(unknown_args)}\n")
         sys.exit(1)
 
+    if "--help" in args:
+        with open("help.txt", "rb") as f:
+            sys.stdout.buffer.write(f.read())
+        sys.exit(0)
     #проверяем конфликт -e и -d
     if "-e" in args and "-d" in args:
         sys.stderr.write("Error: Cannot use options -e и -d at the same time\n")
