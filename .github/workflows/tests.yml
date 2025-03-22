@@ -21,9 +21,5 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-
       - name: Run tests
-        run: tests/test_1
+        run: tests/test_1.py
