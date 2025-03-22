@@ -1,11 +1,11 @@
 import sys
 import base64
 
-def encode_data(data: bytes):
+def encode(data: bytes):
     """Кодирует данные в ASCII85"""
     return base64.a85encode(data)
 
-def decode_data(data: bytes):
+def decode(data: bytes):
     """Декодирует данные из ASCII85"""
     return base64.a85decode(data, adobe=False)
 
@@ -20,14 +20,14 @@ def write_output(data: bytes, add_newline: bool = True):
 def handle_encoding():
     """Обрабатывает режим кодирования."""
     data = read_input()
-    encoded = encode_data(data)
+    encoded = encode(data)
     write_output(encoded)
 
 def handle_decoding():
     """Обрабатывает режим декодирования."""
     data = read_input()
     try:
-        decoded = decode_data(data)
+        decoded = decode(data)
         write_output(decoded)
     except ValueError:
         sys.stderr.write("Error: Invalid ASCII85 input\n")
