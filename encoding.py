@@ -37,3 +37,5 @@ def encode(data: bytes):
             encoded = encoded[:-padding]
 
     return bytes(encoded)
+
+print(encode(b"juice"))

@@ -1,11 +1,6 @@
 import sys
-import base64
 from encoding import encode
-
-
-def decode(data: bytes):
-    """Декодирует данные из ASCII85"""
-    return base64.a85decode(data, adobe=False)
+from decoding import decode
 
 def read_input():
     """Читает данные из stdin"""
