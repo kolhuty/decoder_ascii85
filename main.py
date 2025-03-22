@@ -5,8 +5,9 @@ def encode():
     "Переводит байты в ASCII85 символы"
     data = sys.stdin.buffer.read()
     encoded_newline = b'\n'
+    #Кодируем в ASCII85
     encoded_data = base64.a85encode(data)
-    # вывод
+    #Вывод
     sys.stdout.buffer.write(encoded_data + encoded_newline)
     sys.exit(0)
 
@@ -15,32 +16,34 @@ def decode():
     data = sys.stdin.buffer.read()
     encoded_newline = b'\n'
     try:
-        # Декодируем ASCII85
+        #Декодируем ASCII85
         decoded_bytes = base64.a85decode(data, adobe=False)
-        # Выводим результат в stdout
+        #Вывод
         sys.stdout.buffer.write(decoded_bytes + encoded_newline)
         sys.exit(0)
     except ValueError:
-        sys.stderr.write("Error: Enter characters that are in ascii85 encoding")
+        sys.stderr.write("Error: Enter characters that are in ASCII85 encoding")
         sys.exit(3)
 
 def check_arg():
-    # Разрешенные аргументы
+    #Разрешенные аргументы
     valid_args = {"-e", "-d", "--help"}
     args = sys.argv[1:]
 
-    #проверка на неизвестные элементы
+    #Проверка на неизвестные элементы
     unknown_args = [arg for arg in args if arg not in valid_args]
 
     if unknown_args:
         sys.stderr.write(f"Error: Option does not exist. Call --help {' '.join(unknown_args)}\n")
         sys.exit(1)
 
+    #Опция --help
     if "--help" in args:
         with open("help.txt", "rb") as f:
             sys.stdout.buffer.write(f.read())
         sys.exit(0)
-    #проверяем конфликт -e и -d
+
+    #Проверяем конфликт -e и -d
     if "-e" in args and "-d" in args:
         sys.stderr.write("Error: Cannot use options -e и -d at the same time\n")
         sys.exit(2)
@@ -48,7 +51,7 @@ def check_arg():
     return "-d" in args
 
 if __name__ == '__main__':
-    #определяем режим
+    #Определяем режим
     if check_arg():
         decode()
     else:
