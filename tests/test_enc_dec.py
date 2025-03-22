@@ -1,6 +1,7 @@
 import unittest
 import base64
-from ascii85 import encode, decode
+from ascii85 import decode
+from encoding import encode
 
 class TestEncoding(unittest.TestCase):
     def setUp(self):

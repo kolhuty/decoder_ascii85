@@ -1,9 +1,7 @@
 import sys
 import base64
+from encoding import encode
 
-def encode(data: bytes):
-    """Кодирует данные в ASCII85"""
-    return base64.a85encode(data)
 
 def decode(data: bytes):
     """Декодирует данные из ASCII85"""
