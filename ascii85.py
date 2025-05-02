@@ -6,7 +6,7 @@ def read_input():
     """Читает данные из stdin"""
     return sys.stdin.buffer.read()
 
-def write_output(data: bytes, add_newline: bool = True):
+def write_output(data: bytes, add_newline: bool = False):
     """Записывает результат в stdout."""
     sys.stdout.buffer.write(data + (b'\n' if add_newline else b''))
 
